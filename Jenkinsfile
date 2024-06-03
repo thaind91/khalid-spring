@@ -37,9 +37,9 @@ pipeline {
                 sh 'echo y | docker container prune '
                 sh 'docker volume rm khalid-mysql-data || echo "no volume"'
 
-                sh "docker run --name khalid-mysql --rm --network dev -v khalid-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=db_example  -d mysql:8.0 "
+                sh "docker run --name ndthai-mysql --rm --network dev -v ndthai-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=db_example  -d mysql:8.0 "
                 sh 'sleep 20'
-                sh "docker exec -i khalid-mysql mysql --user=root --password=${MYSQL_ROOT_LOGIN_PSW} < script"
+                sh "docker exec -i ndthai-mysql mysql --user=root --password=${MYSQL_ROOT_LOGIN_PSW} < script"
             }
         }
 
@@ -51,7 +51,7 @@ pipeline {
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name khalid-springboot -p 8081:8080 --network dev thaind91/springboot'
+                sh 'docker container run -d --rm --name ndthai-springboot -p 8081:8080 --network dev thaind91/springboot'
             }
         }
  
